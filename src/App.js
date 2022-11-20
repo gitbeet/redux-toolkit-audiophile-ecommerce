@@ -14,24 +14,36 @@ import { useUserAuthStatus } from "./features/auth/useUserAuthStatus";
 import { useDispatch, useSelector } from "react-redux";
 import "./css/App.css";
 import { useEffect } from "react";
-import { getShoppingCart } from "./features/shoppingCart/shoppingCartSlice";
+import { setShoppingCart } from "./features/shoppingCart/shoppingCartSlice";
+import { doc, onSnapshot } from "firebase/firestore";
+import db from "./config/firebase";
 function App() {
-  const { user } = useSelector((state) => state.user);
-  const { shoppingCart, isError, message } = useSelector(
-    (state) => state.shoppingCart
-  );
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!user) return;
-    dispatch(getShoppingCart());
-  }, [user, dispatch]);
-
-  useEffect(() => {
-    console.log(shoppingCart, isError, message);
-  }, [shoppingCart, isError, message]);
-
+  const { user } = useSelector((state) => state.user);
   useUserAuthStatus();
-
+  useEffect(() => {
+    if (!user) {
+      dispatch(setShoppingCart([]));
+      return;
+    }
+    const userUid = user.uid;
+    const cartItemsRef = doc(db, "shoppingCart", userUid);
+    onSnapshot(cartItemsRef, (snapshot) => {
+      const shoppingCartProducts = Object.entries(snapshot.data()).map(
+        (entry) => ({
+          id: entry[0],
+          ...entry[1],
+        })
+      );
+      dispatch(setShoppingCart(shoppingCartProducts));
+      console.log(
+        Object.entries(snapshot.data()).map((entry) => ({
+          id: entry[0],
+          ...entry[1],
+        }))
+      );
+    });
+  }, [user, dispatch]);
   return (
     <ShoppingCartProvider>
       <PopUpProvider>

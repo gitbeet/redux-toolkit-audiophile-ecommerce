@@ -1,14 +1,13 @@
 import React from "react";
 import { usePopUp } from "../context/PopUpContext";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+import { useSelector } from "react-redux";
 import "../css/ShoppingCartIcon.css";
 
 export default function ShoppingCartIcon() {
+  const { shoppingCart } = useSelector((state) => state.shoppingCart);
   const { toggleCheckoutWindow, showCheckoutForm, showSuccessfulOrderWindow } =
     usePopUp();
-  const { shoppingCartProducts } = useShoppingCart();
-  const numberOfProducts = shoppingCartProducts.length;
-
+  const numberOfProducts = Object.keys(shoppingCart).length;
   return (
     <div
       className="shopping-cart-icon"

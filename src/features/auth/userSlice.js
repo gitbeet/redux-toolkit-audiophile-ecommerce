@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../../config/firebase";
 const initialState = {
+  user: null,
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -98,6 +99,7 @@ const userSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.user = null;
       })
       .addCase(logout.rejected, (state, action) => {
         state.isLoading = false;

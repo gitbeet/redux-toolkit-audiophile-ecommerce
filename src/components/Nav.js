@@ -6,7 +6,6 @@ import NavLinks from "./NavLinks";
 import MobileMenuButton from "./MobileMenuButton";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/userSlice";
-
 export default function Nav({ homePage }) {
   const { toggleMobileMenu } = usePopUp();
   const dispatch = useDispatch();
