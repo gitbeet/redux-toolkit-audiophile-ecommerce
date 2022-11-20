@@ -2,13 +2,15 @@ import FormElement from "./FormElement";
 import "../css/Register.css";
 import { useFormik } from "formik";
 import { registerFormValidation } from "../Validations/registerFormValidation";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register, reset } from "../features/auth/userSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
+
   const { user, isError, message, isLoading } = useSelector(
     (state) => state.user
   );
@@ -21,12 +23,18 @@ const Register = () => {
     },
     onSubmit: (values) => {
       if (!formik.isValid) return;
+      dispatch(reset());
+      setError("");
+      if (message === "auth/email-already-in-use") {
+        setError("User with this email already exist");
+        return;
+      }
       const userData = {
+        fullName: formik.values.fullName,
         email: formik.values.email,
         password: formik.values.password,
       };
       dispatch(register(userData));
-      navigate("/");
     },
     validationSchema: registerFormValidation,
   });
@@ -39,13 +47,20 @@ const Register = () => {
     dispatch(reset());
   }, [user]);
 
-  console.log("message", message);
-  console.log("user", user);
+  useEffect(() => {
+    if (message === "auth/email-already-in-use") {
+      setError("User with this email already exist");
+      return;
+    }
+    if (message) {
+      setError("Firebase error");
+    }
+  }, [message, isError]);
 
   return (
     <div className="register">
       <h1>Register</h1>
-
+      <p className="text-error">{error}</p>
       <form onSubmit={formik.handleSubmit} className="form-container">
         <FormElement
           name="fullName"
@@ -64,6 +79,7 @@ const Register = () => {
           {...formik.getFieldProps("email")}
         />
         <FormElement
+          type="password"
           name="password"
           placeholder="********"
           label="Password"
@@ -72,6 +88,7 @@ const Register = () => {
           {...formik.getFieldProps("password")}
         />
         <FormElement
+          type="password"
           name="password2"
           placeholder="********"
           label="Confirm password"
@@ -84,7 +101,10 @@ const Register = () => {
         </button>
       </form>
       <p>
-        Alredy have an account?<span>Sign in</span>
+        Already have an account?
+        <Link to="/login">
+          <span className="link-bold"> Sign in</span>
+        </Link>
       </p>
     </div>
   );

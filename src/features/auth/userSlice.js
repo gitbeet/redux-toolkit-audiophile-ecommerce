@@ -3,6 +3,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  getAuth,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../config/firebase";
 const initialState = {
@@ -17,15 +19,15 @@ const initialState = {
 export const register = createAsyncThunk(
   "auth/register",
   async (userData, thunkAPI) => {
-    console.log(userData.email, userData.password);
     try {
       await createUserWithEmailAndPassword(
         auth,
         userData.email,
         userData.password
       );
+      await updateProfile(auth.currentUser, { displayName: userData.fullName });
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.code);
     }
   }
 );
@@ -37,7 +39,7 @@ export const login = createAsyncThunk(
     try {
       await signInWithEmailAndPassword(auth, userData.email, userData.password);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.code);
     }
   }
 );
@@ -47,7 +49,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await signOut(auth);
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.code);
   }
 });
 
@@ -74,8 +76,6 @@ const userSlice = createSlice({
         console.log(action.payload);
         state.isLoading = false;
         state.isSuccess = true;
-        console.log("PAYLOAD", action.payload);
-        state.user = action.payload.user;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;

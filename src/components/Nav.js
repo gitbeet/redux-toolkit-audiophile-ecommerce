@@ -4,14 +4,16 @@ import { usePopUp } from "../context/PopUpContext";
 import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import MobileMenuButton from "./MobileMenuButton";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../features/auth/userSlice";
 
 export default function Nav({ homePage }) {
   const { toggleMobileMenu } = usePopUp();
-
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   return (
     <div className={homePage ? "nav-home" : "nav"}>
       <MobileMenuButton onClick={toggleMobileMenu} />
-
       <Link className="nav-logo" to="/">
         <svg width="143" height="25" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -24,7 +26,25 @@ export default function Nav({ homePage }) {
       <div className="nav-links">
         <NavLinks />
       </div>
-      <ShoppingCartIcon />
+      <div style={{ display: "flex", gap: "1rem" }}>
+        {!user && (
+          <h6 className="subtitle nav-links-element">
+            <Link to="/login" style={{ color: "white" }}>
+              Sign In
+            </Link>
+          </h6>
+        )}
+        {user && (
+          <h6
+            style={{ color: "white", cursor: "pointer" }}
+            onClick={() => dispatch(logout())}
+            className="subtitle nav-links-element"
+          >
+            Sign Out
+          </h6>
+        )}
+        <ShoppingCartIcon />
+      </div>
     </div>
   );
 }

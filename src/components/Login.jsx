@@ -2,13 +2,15 @@ import FormElement from "./FormElement";
 import "../css/Register.css";
 import { useFormik } from "formik";
 import { loginFormValidation } from "../Validations/loginFormValidation";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, reset } from "../features/auth/userSlice";
 import { useEffect } from "react";
+import { useState } from "react";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
   const { user, isError, message, isLoading } = useSelector(
     (state) => state.user
   );
@@ -19,12 +21,12 @@ const Login = () => {
     },
     onSubmit: (values) => {
       if (!formik.isValid) return;
+      setError("");
       const userData = {
         email: formik.values.email,
         password: formik.values.password,
       };
       dispatch(login(userData));
-      //   navigate("/");
     },
     validationSchema: loginFormValidation,
   });
@@ -37,13 +39,24 @@ const Login = () => {
     dispatch(reset());
   }, [user]);
 
+  useEffect(() => {
+    if (message === "auth/user-not-found") {
+      setError("User with this account does not exist");
+      return;
+    }
+    if (message === "auth/wrong-password") {
+      setError("Wrong password");
+      return;
+    }
+    if (message) {
+      setError("Firebase error");
+    }
+  }, [message, isError]);
+
   return (
     <div className="register">
       <h1>Login</h1>
-      <h2>
-        {" "}
-        {isError.toString()} {message},{isLoading.toString()}{" "}
-      </h2>
+      <p className="text-error">{error}</p>
       <form onSubmit={formik.handleSubmit} className="form-container">
         <FormElement
           name="email"
@@ -54,6 +67,7 @@ const Login = () => {
           {...formik.getFieldProps("email")}
         />
         <FormElement
+          type="password"
           name="password"
           placeholder="********"
           label="Password"
@@ -67,7 +81,11 @@ const Login = () => {
         </button>
       </form>
       <p>
-        Don't have an acoount yet? <span> Sign up</span>
+        Don't have an acoount yet?{" "}
+        <Link to="/register">
+          {" "}
+          <span className="link-bold"> Sign up</span>
+        </Link>
       </p>
     </div>
   );
