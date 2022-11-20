@@ -4,7 +4,10 @@ import { useProductData } from "../context/ProductDataContext";
 import { usePopUp } from "../context/PopUpContext";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { removeAll } from "../features/shoppingCart/shoppingCartSlice";
+import {
+  removeAll,
+  removeAllLocalStorage,
+} from "../features/shoppingCart/shoppingCartSlice";
 import { formatCurrency } from "../utilities/formatCurrency";
 import CheckoutProductList from "./CheckoutProductList";
 import Backdrop from "./Backdrop";
@@ -13,6 +16,7 @@ import "../css/CheckoutWindow.css";
 
 export default function CheckoutWindow() {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const { shoppingCart, isLoading } = useSelector(
     (state) => state.shoppingCart
   );
@@ -50,6 +54,14 @@ export default function CheckoutWindow() {
     0
   );
 
+  const handleRemoveAll = () => {
+    if (!user) {
+      dispatch(removeAllLocalStorage());
+      return;
+    }
+    dispatch(removeAll());
+  };
+
   return ReactDOM.createPortal(
     <>
       <Backdrop clickFunction={hideCheckoutWindow} />
@@ -59,7 +71,7 @@ export default function CheckoutWindow() {
           <div className="remove-all">
             <TextButton
               disabled={isLoading}
-              clickFunction={() => dispatch(removeAll())}
+              clickFunction={handleRemoveAll}
               underline={true}
               text="Remove all"
             />

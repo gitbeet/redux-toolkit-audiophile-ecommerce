@@ -17,15 +17,15 @@ import { useEffect } from "react";
 import { setShoppingCart } from "./features/shoppingCart/shoppingCartSlice";
 import { doc, onSnapshot } from "firebase/firestore";
 import db from "./config/firebase";
+import { useStoreShoppingCart } from "./features/shoppingCart/useStoreShoppingCart";
 function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
+  useStoreShoppingCart();
+
   useUserAuthStatus();
   useEffect(() => {
-    if (!user) {
-      dispatch(setShoppingCart([]));
-      return;
-    }
+    if (!user) return;
     const userUid = user.uid;
     const cartItemsRef = doc(db, "shoppingCart", userUid);
     onSnapshot(cartItemsRef, (snapshot) => {

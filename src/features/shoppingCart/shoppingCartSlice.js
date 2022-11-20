@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
-import { useSelector } from "react-redux";
 import db from "../../config/firebase";
 import { auth } from "../../config/firebase";
+
 const initialState = {
   shoppingCart: [],
   isLoading: false,
@@ -10,8 +10,6 @@ const initialState = {
   isSuccess: false,
   message: "",
 };
-
-// get products , add product , remove product , change quantity
 
 export const getShoppingCart = createAsyncThunk(
   "shoppingCart/getAll",
@@ -67,6 +65,50 @@ const shoppingCartSlice = createSlice({
       state.shoppingCart = action.payload;
       console.log(state.shoppingCart);
     },
+    addToCartLocalStorage: (state, action) => {
+      console.log(state.shoppingCart);
+      if (action.payload.quantity === 0) return;
+      if (state.shoppingCart.length === 0) {
+        state.shoppingCart = [
+          { id: action.payload.id, quantity: action.payload.quantity },
+        ];
+        return;
+      }
+      if (
+        state.shoppingCart.findIndex(
+          (product) => product.id === action.payload.id
+        ) === -1
+      ) {
+        state.shoppingCart.push({
+          id: action.payload.id,
+          quantity: action.payload.quantity,
+        });
+        return;
+      }
+      state.shoppingCart = state.shoppingCart.map((product) => {
+        return product.id === action.payload.id
+          ? { ...product, quantity: action.payload.quantity }
+          : { ...product };
+      });
+    },
+    changeQuantityLocalStorage: (state, action) => {
+      state.shoppingCart = state.shoppingCart.map((product) => {
+        return product.id === action.payload.id
+          ? { ...product, quantity: action.payload.quantity }
+          : product;
+      });
+
+      //   function changeQuantity(productId , operator){
+      //     setShoppingCartProducts(prev => prev.map( product => {
+      //         return product.name === productId ? {...product , quantity : operator === 'plus' ? product.quantity + 1
+      //                                                                           : product.quantity < 1 ? 0 : product.quantity - 1}
+      //                                           : product
+      //     }))
+      // }
+    },
+    removeAllLocalStorage: (state) => {
+      state.shoppingCart = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -105,5 +147,10 @@ const shoppingCartSlice = createSlice({
       });
   },
 });
-export const { setShoppingCart } = shoppingCartSlice.actions;
+export const {
+  setShoppingCart,
+  addToCartLocalStorage,
+  removeAllLocalStorage,
+  changeQuantityLocalStorage,
+} = shoppingCartSlice.actions;
 export default shoppingCartSlice.reducer;

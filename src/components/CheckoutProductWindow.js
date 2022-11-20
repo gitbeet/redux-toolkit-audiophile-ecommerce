@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import QuantityButtons from "./QuantityButtons";
 import { useProductData } from "../context/ProductDataContext";
 import { formatCurrency } from "../utilities/formatCurrency";
-import { addToCart } from "../features/shoppingCart/shoppingCartSlice";
+import {
+  addToCart,
+  changeQuantityLocalStorage,
+} from "../features/shoppingCart/shoppingCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "../css/CheckoutProductWindow.css";
 
 export default function CheckoutProductWindow({ product, form = false }) {
+  const { user } = useSelector((state) => state.user);
   const { isLoading } = useSelector((state) => state.shoppingCart);
   const dispatch = useDispatch();
   const [cartImage, setCartImage] = useState();
@@ -22,6 +26,26 @@ export default function CheckoutProductWindow({ product, form = false }) {
       setCartImage(image.default)
     );
   }, []);
+
+  const handleChangeQuantity = (operator) => {
+    if (!user) {
+      dispatch(
+        changeQuantityLocalStorage({
+          id: product.id,
+          quantity:
+            operator === "add" ? product.quantity + 1 : product.quantity - 1,
+        })
+      );
+      return;
+    }
+    dispatch(
+      addToCart({
+        id: product.id,
+        quantity:
+          operator === "add" ? product.quantity + 1 : product.quantity - 1,
+      })
+    );
+  };
 
   return (
     <div
@@ -58,15 +82,9 @@ export default function CheckoutProductWindow({ product, form = false }) {
             disabled={isLoading}
             buttonLeft={() => {
               if (product.quantity < 1) return;
-              dispatch(
-                addToCart({ id: product.id, quantity: product.quantity - 1 })
-              );
+              handleChangeQuantity("remove");
             }}
-            buttonRight={() =>
-              dispatch(
-                addToCart({ id: product.id, quantity: product.quantity + 1 })
-              )
-            }
+            buttonRight={() => handleChangeQuantity("add")}
             quantity={product.quantity}
           />
         )}
