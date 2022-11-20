@@ -15,7 +15,6 @@ export default function CheckoutProductWindow({ product, form = false }) {
   const fullProductData = productData.find((prod) => {
     return prod.id.toString() === product.id;
   });
-  const { quantity, id } = product;
   const { slug, price } = fullProductData;
   console.log(product);
   useEffect(() => {
@@ -51,18 +50,24 @@ export default function CheckoutProductWindow({ product, form = false }) {
         </div>
       </div>
       <div className="checkout-window-quantity-buttons">
-        {form && <h6 className="color-gray quantity-form">x{quantity}</h6>}
+        {form && (
+          <h6 className="color-gray quantity-form">x{product.quantity}</h6>
+        )}
         {!form && (
           <QuantityButtons
             disabled={isLoading}
             buttonLeft={() => {
-              if (quantity < 1) return;
-              dispatch(addToCart({ id, quantity: quantity - 1 }));
+              if (product.quantity < 1) return;
+              dispatch(
+                addToCart({ id: product.id, quantity: product.quantity - 1 })
+              );
             }}
             buttonRight={() =>
-              dispatch(addToCart({ id, quantity: quantity + 1 }))
+              dispatch(
+                addToCart({ id: product.id, quantity: product.quantity + 1 })
+              )
             }
-            quantity={quantity}
+            quantity={product.quantity}
           />
         )}
       </div>

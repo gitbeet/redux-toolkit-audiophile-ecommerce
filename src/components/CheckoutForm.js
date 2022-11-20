@@ -182,7 +182,11 @@ export default function CheckoutForm() {
           <div className="checkout-form-desktop-summary">
             <h6 className="checkout-form-text-summary">summary</h6>
             <CheckoutFormSummary />
-            <button onClick={formik.handleSubmit} className="btn-accent">
+            <button
+              onClick={formik.handleSubmit}
+              className="btn-accent"
+              type="button"
+            >
               continue & pay
             </button>
           </div>

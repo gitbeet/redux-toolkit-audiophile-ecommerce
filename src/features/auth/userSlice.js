@@ -5,7 +5,8 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../../config/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import db, { auth } from "../../config/firebase";
 const initialState = {
   user: null,
   isLoading: false,
@@ -25,6 +26,7 @@ export const register = createAsyncThunk(
         userData.password
       );
       await updateProfile(auth.currentUser, { displayName: userData.fullName });
+      return await setDoc(doc(db, "shoppingCart", auth.currentUser.uid), {});
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
     }
