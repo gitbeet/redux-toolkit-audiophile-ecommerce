@@ -9,11 +9,29 @@ import CategoryPage from "./components/CategoryPage";
 import ProductPage from "./components/ProductPage";
 import CheckoutForm from "./components/CheckoutForm";
 import Register from "./components/Register";
-import "./css/App.css";
-import { useUserAuthStatus } from "./features/auth/useUserAuthStatus";
 import Login from "./components/Login";
+import { useUserAuthStatus } from "./features/auth/useUserAuthStatus";
+import { useDispatch, useSelector } from "react-redux";
+import "./css/App.css";
+import { useEffect } from "react";
+import { getShoppingCart } from "./features/shoppingCart/shoppingCartSlice";
 function App() {
+  const { user } = useSelector((state) => state.user);
+  const { shoppingCart, isError, message } = useSelector(
+    (state) => state.shoppingCart
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!user) return;
+    dispatch(getShoppingCart());
+  }, [user, dispatch]);
+
+  useEffect(() => {
+    console.log(shoppingCart, isError, message);
+  }, [shoppingCart, isError, message]);
+
   useUserAuthStatus();
+
   return (
     <ShoppingCartProvider>
       <PopUpProvider>
