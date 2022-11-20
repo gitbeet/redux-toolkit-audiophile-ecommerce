@@ -1,0 +1,7 @@
+.add-to-cart{
+    display: grid;
+    grid-template-columns: 7.5rem 11rem;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}

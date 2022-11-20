@@ -1,0 +1,20 @@
+.category-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    margin-top: 2.2rem;
+}
+
+
+@media (min-width:768px) {
+    .category-list{
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+    }
+}

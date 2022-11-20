@@ -1,0 +1,16 @@
+.nav-links-element{
+    margin: 0;
+    transition: var(--button-transition);
+}
+
+.nav-links-element:hover{
+    color: var(--clr-accent);
+}
+
+@media (min-width:768px){
+    .nav-links-element + .nav-links-element{
+            margin-left: 1.6rem;    
+    }
+}
+
+

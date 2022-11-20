@@ -1,0 +1,17 @@
+.checkout-pricing{
+    margin: 2rem 0;
+}
+
+.checkout-pricing section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkout-pricing h6{
+    margin: .4rem 0;
+}
+
+.checkout-pricing section:last-child{
+    margin-top: 1.5rem;
+}

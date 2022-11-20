@@ -1,0 +1,26 @@
+.show-animation,
+.hide-animation{
+    background-color: white;
+    z-index: 20;
+    position: absolute;
+    top:5.6rem;
+    width: 100%;
+    padding: 2rem 2rem;
+    padding-bottom: 5rem;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.show-animation{
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform .3s ease-in-out, opacity .1s ease-in-out ;
+}
+
+.hide-animation{
+    transition:transform .3s ease-in-out , opacity .6s ease-in-out;
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+

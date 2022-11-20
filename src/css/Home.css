@@ -1,0 +1,14 @@
+.home-container{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (min-width:1440px) { 
+
+    .home-category-list{
+        margin-top: 5rem;
+    }
+    
+}

@@ -1,0 +1,54 @@
+.mobile-menu-button {
+  position: relative;
+  width: 2.5rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.mobile-menu-top-line,
+.mobile-menu-middle-line,
+.mobile-menu-bottom-line,
+.mobile-menu-top-line-open,
+.mobile-menu-middle-line-open,
+.mobile-menu-bottom-line-open {
+  position: absolute;
+  width: 2.2rem;
+  height: 0.2rem;
+  background-color: var(--clr-white);
+  transition: all 0.4s ease-in-out;
+}
+
+.mobile-menu-top-line {
+  top: 0;
+}
+
+.mobile-menu-middle-line {
+  top: 50%;
+}
+
+.mobile-menu-bottom-line {
+  top: 100%;
+}
+
+.mobile-menu-middle-line-open {
+  opacity: 0;
+}
+
+.mobile-menu-top-line-open,
+.mobile-menu-bottom-line-open {
+  top: 50%;
+}
+
+.mobile-menu-top-line-open {
+  rotate: 45deg;
+}
+
+.mobile-menu-bottom-line-open {
+  rotate: -45deg;
+}
+
+@media (min-width: 1440px) {
+  .mobile-menu-button {
+    display: none;
+  }
+}

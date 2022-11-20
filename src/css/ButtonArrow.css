@@ -1,0 +1,19 @@
+.button-arrow{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    border: none;
+    background: none;
+    color: var(--clr-black-transparent);
+    transition: var(--button-transition);
+}
+
+.button-arrow:hover{
+    color: var(--clr-accent);
+}
+
+
+.button-arrow-icon{
+    width: .5rem;
+}
+

@@ -1,0 +1,62 @@
+.checkout-product-window{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.checkout-product-window-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkout-product-window-left{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;    
+}
+
+
+.checkout-product-image{
+    width: 4rem;
+    height: 4rem;
+}
+
+.checkout-product-name,
+.checkout-product-price{
+    margin: 0;
+}
+
+.checkout-product-text{
+    max-width: 4rem;
+}
+
+.checkout-product-text-form{
+    max-width: 7rem;
+}
+
+.checkout-product-name{
+    font-size: 0.9375rem ;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* transform scale works but scale doesn't */
+.checkout-window-quantity-buttons{
+   transform: scale(.7);
+   transform-origin: right;
+}
+
+.quantity-form{
+    position: relative;
+    top:-1.4rem;
+    margin: 0;
+}
+
+
+

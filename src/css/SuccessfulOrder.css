@@ -1,0 +1,31 @@
+.successful-order{
+    display: flex;
+    flex-direction: column;
+    width: 21.5rem;
+    padding: 2.5rem;
+    position: absolute;
+    background-color: var(--clr-white);
+    top:20vh;
+    left:50%;
+    transform: translateX(-50%);
+    border-radius: var(--border-radius);
+    z-index: 21;  
+}
+
+.successful-order button{
+  margin-top: 1.5rem;
+}
+
+.successful-order > *{
+     font-weight: 500;
+}
+
+.confirmation-icon{
+    width: 4.5rem;
+}
+
+@media (min-width:768px){
+  .successful-order{
+    width: 38rem;
+  }
+}

@@ -1,0 +1,31 @@
+.gallery-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+@media (min-width:768px){
+
+    .gallery-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gallery-wrapper{
+        display: grid;
+        grid-template-areas: 'topLeft right'
+                            'bottomLeft right';
+        grid-template-columns: 1.77fr 2.5fr;
+        grid-template-rows: 2.5fr;
+        width: 100%;
+
+    }
+
+    .gallery-wrapper img{
+        width: 100%;
+    }
+}

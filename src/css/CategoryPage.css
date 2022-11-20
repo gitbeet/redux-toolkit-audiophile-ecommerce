@@ -1,0 +1,27 @@
+.category-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.category-page-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    background-color: var(--clr-black);
+    color: var(--clr-white);
+    padding: 1rem;
+}
+
+
+.product-card-list{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+    margin-bottom: 4rem;
+}

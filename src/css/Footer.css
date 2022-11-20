@@ -1,0 +1,143 @@
+.footer{
+    position: relative;
+    background-color: var(--clr-primary) ;
+    padding: 3.2rem 0;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-container{
+    width: var(--container-width-sm-md);
+    text-align: center;
+}
+
+.footer-nav{
+    color: var(--clr-white);
+    margin: 3rem 0;
+}
+
+.footer-nav  h6 {
+    margin-bottom: 1.3rem;
+}
+
+.footer p{
+    color: var(--clr-white);
+    opacity: .5;
+}
+
+.copyright-message{
+    font-weight: bold;
+    margin: 2.6rem 0;
+}
+
+.socials-icon{
+    color:var(--clr-white);
+    transition: var(--button-transition);
+}
+
+.socials-icon:hover{
+    cursor: pointer;
+    color:var(--clr-accent)
+}
+
+
+.socials-icon + .socials-icon{
+    margin-left: 1rem;
+}
+
+.footer-logo{
+    position:relative;
+    z-index: 18;
+}
+
+.footer::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top:0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background-color: var(--clr-accent);
+    z-index: 5;
+}
+
+.footer-copyright-socials{
+    width: 90%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width:768px){
+
+    .footer{
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+        padding: 3.2rem 0;
+    }
+
+    .footer::before{
+        left:5%;
+        transform: translateX(0);
+    }
+
+    .footer-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .footer-nav{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .footer-description{
+        margin-top: 0;
+    }
+
+    .footer-copyright-socials{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width:1440px){
+
+    .footer-container{
+        width: var(--container-width-lg);
+    }
+
+   .desktop-footer-logo-nav{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+   }
+
+   .footer-description{
+    width: 50%;
+    }
+
+    .footer::before{
+        left:calc( (100% - var(--container-width-lg))  / 2);
+        transform: translateX(0);
+    }
+
+    .socials-icon{
+        position: relative;
+        bottom: 4rem;
+    }
+}
+

@@ -1,0 +1,31 @@
+.shopping-cart-icon{
+    position: relative;
+    cursor: pointer;
+    color:var(--clr-white);
+    transition: var(--button-transition);
+}
+
+.shopping-cart-icon:hover{
+    color: var(--clr-accent);
+}
+
+
+.shopping-cart-circle{
+    position: absolute;
+    top: 60%;
+    left: 60%;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--clr-accent);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .6rem;
+}
+
+.shopping-cart-number{
+    color: var(--clr-white);
+    font-size: .9rem;
+    font-weight:bold;
+}

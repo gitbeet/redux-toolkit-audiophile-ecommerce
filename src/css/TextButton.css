@@ -1,0 +1,4 @@
+.go-back-button:hover{
+    color:var(--clr-accent);
+    transition: var(--button-transition);
+}
