@@ -1,10 +1,9 @@
-import { useProductData } from "../context/ProductDataContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useSelector } from "react-redux";
 import "../css/CheckoutPricing.css";
 
 export default function CheckoutPricing() {
-  const { productData } = useProductData();
+  const { productData } = useSelector((state) => state.products);
   const { shoppingCart } = useSelector((state) => state.shoppingCart);
   let totalPrice = shoppingCart.reduce(
     (acc, product) =>

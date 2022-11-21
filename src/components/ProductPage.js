@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useProductData } from "../context/ProductDataContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 import PageNotFound from "./PageNotFound";
 import InTheBoxList from "./InTheBoxList";
@@ -10,12 +9,13 @@ import CategoryList from "./CategoryList";
 import AddToCart from "./AddToCart";
 import TextButton from "./TextButton";
 import "../css/ProductPage.css";
+import { useSelector } from "react-redux";
 
 export default function ProductPage() {
   const navigate = useNavigate();
 
   const { productId } = useParams();
-  const { productData } = useProductData();
+  const { productData } = useSelector((state) => state.products);
 
   const [mobileImage, setMobileImage] = useState();
   const [tabletImage, setTabletImage] = useState();

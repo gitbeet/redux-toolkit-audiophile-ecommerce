@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useProductData } from "../context/ProductDataContext";
 import "../css/ReccomendedProduct.css";
 
 export default function ReccomendedProduct({ reccomendedProduct, category }) {
   const { name, slug, image } = reccomendedProduct;
-
-  const { productData } = useProductData();
+  const { productData } = useSelector((state) => state.products);
   const id = productData.find((product) => product.slug === slug).id;
 
   const [mobileImage, setMobileImage] = useState();

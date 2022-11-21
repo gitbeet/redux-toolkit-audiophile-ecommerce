@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import QuantityButtons from "./QuantityButtons";
-import { useProductData } from "../context/ProductDataContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 import {
   addToCart,
@@ -14,7 +13,7 @@ export default function CheckoutProductWindow({ product, form = false }) {
   const { isLoading } = useSelector((state) => state.shoppingCart);
   const dispatch = useDispatch();
   const [cartImage, setCartImage] = useState();
-  const { productData } = useProductData();
+  const { productData } = useSelector((state) => state.products);
 
   const fullProductData = productData.find((prod) => {
     return prod.id.toString() === product.id;

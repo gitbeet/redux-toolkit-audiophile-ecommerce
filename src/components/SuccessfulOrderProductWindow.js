@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import CheckoutProductWindow from "./CheckoutProductWindow";
-import { useProductData } from "../context/ProductDataContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useSelector } from "react-redux";
 import "../css/SuccessfulOrderProductWindow.css";
@@ -11,7 +10,7 @@ export default function SuccessfulOrderProductWindow() {
     window.scrollTo(0, 0);
   }, []);
 
-  const { productData } = useProductData();
+  const { productData } = useSelector((state) => state.products);
   const otherItems = shoppingCart.length - 1;
   let totalPrice = shoppingCart.reduce(
     (acc, product) =>

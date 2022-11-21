@@ -1,5 +1,4 @@
 import { Routes, Route, Redi } from "react-router-dom";
-import ProductDataProvider from "./context/ProductDataContext";
 import PopUpProvider from "./context/PopUpContext";
 import Home from "./components/Home";
 import PageNotFound from "./components/PageNotFound";
@@ -30,20 +29,18 @@ function App() {
   }, [products]);
   return (
     <PopUpProvider>
-      <ProductDataProvider>
-        <Routes>
-          <Route path="/" element={<SharedLayout />}>
-            <Route index element={<Home />} />
-            <Route path="/checkout" element={<CheckoutForm />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/:categoryName" element={<CategoryPage />} />
-            <Route path="/:categoryName/:productId" element={<ProductPage />} />
-            <Route path="/404" element={<PageNotFound />} />
-            {/* <Route path="/*" element={<PageNotFound />} /> */}
-          </Route>
-        </Routes>
-      </ProductDataProvider>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/checkout" element={<CheckoutForm />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/:categoryName" element={<CategoryPage />} />
+          <Route path="/:categoryName/:productId" element={<ProductPage />} />
+          <Route path="/404" element={<PageNotFound />} />
+          {/* <Route path="/*" element={<PageNotFound />} /> */}
+        </Route>
+      </Routes>
     </PopUpProvider>
   );
 }

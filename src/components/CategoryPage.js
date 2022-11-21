@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useProductData } from "../context/ProductDataContext";
 import ProductCard from "./ProductCard";
 import CategoryList from "./CategoryList";
 import "../css/CategoryPage.css";
+import { useSelector } from "react-redux";
 
 export default function CategoryPage() {
   const navigate = useNavigate();
   const { categoryName } = useParams();
-  const { productData } = useProductData();
+  const { productData } = useSelector((state) => state.products);
 
   const categoryItems = productData.filter(
     (product) => product.category === categoryName

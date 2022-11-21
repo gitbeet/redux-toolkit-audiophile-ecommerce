@@ -1,6 +1,5 @@
 import { useState } from "react";
 import * as ReactDOM from "react-dom";
-import { useProductData } from "../context/ProductDataContext";
 import { usePopUp } from "../context/PopUpContext";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,7 +20,7 @@ export default function CheckoutWindow() {
     (state) => state.shoppingCart
   );
   const navigate = useNavigate();
-  const { productData } = useProductData();
+  const { productData } = useSelector((state) => state.products);
   const { hideCheckoutWindow } = usePopUp();
   const [error, setError] = useState();
   const [visible, setVisible] = useState(false);
