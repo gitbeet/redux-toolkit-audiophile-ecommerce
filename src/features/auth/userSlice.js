@@ -74,7 +74,6 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(register.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isLoading = false;
         state.isSuccess = true;
       })

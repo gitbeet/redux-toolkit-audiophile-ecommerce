@@ -20,7 +20,6 @@ export default function CheckoutProductWindow({ product, form = false }) {
     return prod.id.toString() === product.id;
   });
   const { slug, price } = fullProductData;
-  console.log(product);
   useEffect(() => {
     import(`../assets/cart/image-${fullProductData.slug}.jpg`).then((image) =>
       setCartImage(image.default)

@@ -18,7 +18,6 @@ export const addToCart = createAsyncThunk(
       const { id, quantity } = productData;
       const userUid = auth.currentUser.uid;
       const index = thunkAPI.getState().shoppingCart.shoppingCart.length;
-      console.log(index);
 
       return await updateDoc(doc(db, "shoppingCart", userUid), {
         [id]: { quantity, index },
@@ -34,9 +33,6 @@ export const removeAll = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const userUid = auth.currentUser.uid;
-      const index = thunkAPI.getState().shoppingCart.shoppingCart.length;
-      console.log(index);
-
       return await setDoc(doc(db, "shoppingCart", userUid), {});
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -50,10 +46,8 @@ const shoppingCartSlice = createSlice({
   reducers: {
     setShoppingCart: (state, action) => {
       state.shoppingCart = action.payload;
-      console.log(state.shoppingCart);
     },
     addToCartLocalStorage: (state, action) => {
-      console.log(state.shoppingCart);
       if (action.payload.quantity === 0) return;
       if (state.shoppingCart.length === 0) {
         state.shoppingCart = [
@@ -103,7 +97,6 @@ const shoppingCartSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        console.log(action.payload);
       });
   },
 });

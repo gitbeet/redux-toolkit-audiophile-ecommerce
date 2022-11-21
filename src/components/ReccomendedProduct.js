@@ -1,32 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import '../css/ReccomendedProduct.css'
+import { useEffect, useState } from "react";
 
-export default function ReccomendedProduct({reccomendedProduct , category}) {
+import { Link } from "react-router-dom";
+import { useProductData } from "../context/ProductDataContext";
+import "../css/ReccomendedProduct.css";
 
-  const {name,slug,image} = reccomendedProduct
-  
-  const [mobileImage,setMobileImage] = useState()
-  const [tabletImage,setTabletImage] = useState()
-  const [desktopImage,setDesktopImage] = useState()  
+export default function ReccomendedProduct({ reccomendedProduct, category }) {
+  const { name, slug, image } = reccomendedProduct;
 
-// console.log(`../assets/shared/mobile/${slug}.jpg`)
+  const { productData } = useProductData();
+  const id = productData.find((product) => product.slug === slug).id;
 
-useEffect(() => {
-  import(`../assets/shared/mobile/image-${slug}.jpg`).then( bg => setMobileImage(bg.default))
-  import(`../assets/shared/tablet/image-${slug}.jpg`).then( bg => setTabletImage(bg.default))
-  import(`../assets/shared/desktop/image-${slug}.jpg`).then( bg => setDesktopImage(bg.default))
-},[image])
+  const [mobileImage, setMobileImage] = useState();
+  const [tabletImage, setTabletImage] = useState();
+  const [desktopImage, setDesktopImage] = useState();
 
-
+  useEffect(() => {
+    import(`../assets/shared/mobile/image-${slug}.jpg`).then((bg) =>
+      setMobileImage(bg.default)
+    );
+    import(`../assets/shared/tablet/image-${slug}.jpg`).then((bg) =>
+      setTabletImage(bg.default)
+    );
+    import(`../assets/shared/desktop/image-${slug}.jpg`).then((bg) =>
+      setDesktopImage(bg.default)
+    );
+  }, [image]);
 
   return (
-    <div className='reccomended-product'>
-      <img className='image-mobile image-border' src={mobileImage} alt='product' />
-      <img className='image-tablet image-border' src={tabletImage} alt='product' />
-      <img className='image-desktop image-border' src={desktopImage} alt='product' />
+    <div className="reccomended-product">
+      <img
+        className="image-mobile image-border"
+        src={mobileImage}
+        alt="product"
+      />
+      <img
+        className="image-tablet image-border"
+        src={tabletImage}
+        alt="product"
+      />
+      <img
+        className="image-desktop image-border"
+        src={desktopImage}
+        alt="product"
+      />
       <h5>{name}</h5>
-      <Link to={`/${category}/${slug}`}><button className='btn-accent'>see product</button></Link>
+      <Link to={`/${category}/${id}`}>
+        <button className="btn-accent">see product</button>
+      </Link>
     </div>
-  )
+  );
 }

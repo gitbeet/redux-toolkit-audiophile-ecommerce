@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Redi } from "react-router-dom";
 import ProductDataProvider from "./context/ProductDataContext";
 import PopUpProvider from "./context/PopUpContext";
 import Home from "./components/Home";
@@ -10,39 +10,24 @@ import CheckoutForm from "./components/CheckoutForm";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import { useUserAuthStatus } from "./features/auth/useUserAuthStatus";
-import { useDispatch, useSelector } from "react-redux";
-import "./css/App.css";
-import { useEffect } from "react";
-import { setShoppingCart } from "./features/shoppingCart/shoppingCartSlice";
-import { doc, onSnapshot } from "firebase/firestore";
-import db from "./config/firebase";
 import { useStoreShoppingCart } from "./features/shoppingCart/useStoreShoppingCart";
+import { useOnSnapshot } from "./features/shoppingCart/useOnSnapshot";
+import "./css/App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "./features/products/productsSlice";
 function App() {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
   useStoreShoppingCart();
-
   useUserAuthStatus();
+  useOnSnapshot();
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.products);
   useEffect(() => {
-    if (!user) return;
-    const userUid = user.uid;
-    const cartItemsRef = doc(db, "shoppingCart", userUid);
-    onSnapshot(cartItemsRef, (snapshot) => {
-      const shoppingCartProducts = Object.entries(snapshot.data()).map(
-        (entry) => ({
-          id: entry[0],
-          ...entry[1],
-        })
-      );
-      dispatch(setShoppingCart(shoppingCartProducts));
-      console.log(
-        Object.entries(snapshot.data()).map((entry) => ({
-          id: entry[0],
-          ...entry[1],
-        }))
-      );
-    });
-  }, [user, dispatch]);
+    dispatch(getAllProducts());
+  }, [dispatch]);
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
   return (
     <PopUpProvider>
       <ProductDataProvider>
@@ -53,11 +38,9 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/:categoryName" element={<CategoryPage />} />
-            <Route
-              path="/:categoryName/:productName"
-              element={<ProductPage />}
-            />
-            <Route path="*" element={<PageNotFound />} />
+            <Route path="/:categoryName/:productId" element={<ProductPage />} />
+            <Route path="/404" element={<PageNotFound />} />
+            {/* <Route path="/*" element={<PageNotFound />} /> */}
           </Route>
         </Routes>
       </ProductDataProvider>

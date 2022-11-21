@@ -1,11 +1,12 @@
-import "../css/Nav.css";
-import ShoppingCartIcon from "./ShoppingCartIcon";
 import { usePopUp } from "../context/PopUpContext";
 import { Link } from "react-router-dom";
-import NavLinks from "./NavLinks";
+import ShoppingCartIcon from "./ShoppingCartIcon";
 import MobileMenuButton from "./MobileMenuButton";
+import NavLinks from "./NavLinks";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/auth/userSlice";
+import "../css/Nav.css";
+
 export default function Nav({ homePage }) {
   const { toggleMobileMenu } = usePopUp();
   const dispatch = useDispatch();

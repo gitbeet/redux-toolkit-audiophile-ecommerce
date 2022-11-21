@@ -20,6 +20,5 @@ export const useStoreShoppingCart = () => {
       "audiophileShoppingCart",
       JSON.stringify(shoppingCart)
     );
-    console.log(shoppingCart);
   }, [shoppingCart, user]);
 };
