@@ -11,19 +11,6 @@ const initialState = {
   message: "",
 };
 
-export const getShoppingCart = createAsyncThunk(
-  "shoppingCart/getAll",
-  async (_, thunkAPI) => {
-    try {
-      const userUid = auth.currentUser.uid;
-      const cartItemsRef = doc(db, "shoppingCart", userUid);
-      return await getDoc(cartItemsRef);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 export const addToCart = createAsyncThunk(
   "shoppingCart/addToCart",
   async (productData, thunkAPI) => {
@@ -97,14 +84,6 @@ const shoppingCartSlice = createSlice({
           ? { ...product, quantity: action.payload.quantity }
           : product;
       });
-
-      //   function changeQuantity(productId , operator){
-      //     setShoppingCartProducts(prev => prev.map( product => {
-      //         return product.name === productId ? {...product , quantity : operator === 'plus' ? product.quantity + 1
-      //                                                                           : product.quantity < 1 ? 0 : product.quantity - 1}
-      //                                           : product
-      //     }))
-      // }
     },
     removeAllLocalStorage: (state) => {
       state.shoppingCart = [];
@@ -112,25 +91,6 @@ const shoppingCartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getShoppingCart.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getShoppingCart.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
-
-        if (action.payload.exists()) {
-          state.shoppingCart = action.payload.data();
-        } else {
-          state.shoppingCart = [];
-        }
-      })
-      .addCase(getShoppingCart.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
       .addCase(addToCart.pending, (state) => {
         state.isLoading = true;
       })

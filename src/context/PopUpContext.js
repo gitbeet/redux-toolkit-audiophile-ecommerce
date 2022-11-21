@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from "react";
-import { useShoppingCart } from "./ShoppingCartContext";
 
 const popUpContext = createContext();
 
@@ -10,8 +9,6 @@ export function usePopUp() {
 }
 
 export default function PopUpProvider({ children }) {
-  const { removeAll } = useShoppingCart();
-
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showCheckoutWindow, setShowCheckoutWindow] = useState(false);
   const [showSuccessfulOrderWindow, setShowSuccessfulOrderWindow] =
