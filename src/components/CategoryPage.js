@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import CategoryList from "./CategoryList";
-import "../css/CategoryPage.css";
 import { useSelector } from "react-redux";
+import { MoonLoader } from "react-spinners";
+import "../css/CategoryPage.css";
 
 export default function CategoryPage() {
   const navigate = useNavigate();
@@ -18,10 +19,17 @@ export default function CategoryPage() {
     window.scrollTo(0, 0);
   }, [categoryItems]);
 
-  if (!productData) return <h1>Loading ...</h1>;
-  if (categoryItems.length === 0) {
+  if (!productData.length)
+    return (
+      <div className="container not-found">
+        <MoonLoader />
+      </div>
+    );
+  if (productData.length && !categoryItems.length) {
     navigate("/404");
+    return;
   }
+
   return (
     <div className="category-page">
       <div className="category-page-header">

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { formatCurrency } from "../utilities/formatCurrency";
+import { MoonLoader } from "react-spinners";
 import PageNotFound from "./PageNotFound";
 import InTheBoxList from "./InTheBoxList";
 import ProductImageGallery from "./ProductImageGallery";
@@ -9,7 +11,6 @@ import CategoryList from "./CategoryList";
 import AddToCart from "./AddToCart";
 import TextButton from "./TextButton";
 import "../css/ProductPage.css";
-import { useSelector } from "react-redux";
 
 export default function ProductPage() {
   const navigate = useNavigate();
@@ -37,7 +38,14 @@ export default function ProductPage() {
     );
   }, [product]);
 
-  if (!product) return <PageNotFound />;
+  if (!productData.length)
+    return (
+      <div className="container not-found">
+        <MoonLoader />
+      </div>
+    );
+  if (productData.length && !product) return <PageNotFound />;
+
   return (
     <>
       <div className="container product-page-container">

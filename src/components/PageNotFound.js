@@ -4,10 +4,14 @@ import { Link } from "react-router-dom";
 
 export default function PageNotFound() {
   return (
-    <div className="container text-center">
+    <div className="container text-center not-found">
       <h1>Sorry :(</h1>
-      <p>The page you requested was not found.</p>
-      <Link to="/">Go to Homepage</Link>
+      <h3>The page you requested was not found.</h3>
+
+      <Link to="/">
+        {" "}
+        <button className="btn-accent">Go to Homepage </button>
+      </Link>
     </div>
   );
 }
