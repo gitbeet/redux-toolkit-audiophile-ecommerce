@@ -16,7 +16,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
 
   const { productId } = useParams();
-  const { productData } = useSelector((state) => state.products);
+  const { productData, isLoading } = useSelector((state) => state.products);
 
   const [mobileImage, setMobileImage] = useState();
   const [tabletImage, setTabletImage] = useState();
@@ -38,13 +38,13 @@ export default function ProductPage() {
     );
   }, [product]);
 
-  if (!productData.length)
+  if (isLoading)
     return (
       <div className="container not-found">
         <MoonLoader />
       </div>
     );
-  if (productData.length && !product) return <PageNotFound />;
+  if (!isLoading && !product) return <PageNotFound />;
 
   return (
     <>

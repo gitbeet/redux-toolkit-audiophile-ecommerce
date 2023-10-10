@@ -9,7 +9,7 @@ import "../css/CategoryPage.css";
 export default function CategoryPage() {
   const navigate = useNavigate();
   const { categoryName } = useParams();
-  const { productData } = useSelector((state) => state.products);
+  const { productData, isLoading } = useSelector((state) => state.products);
 
   const categoryItems = productData.filter(
     (product) => product.category === categoryName
@@ -19,13 +19,13 @@ export default function CategoryPage() {
     window.scrollTo(0, 0);
   }, [categoryItems]);
 
-  if (!productData.length)
+  if (isLoading)
     return (
       <div className="container not-found">
         <MoonLoader />
       </div>
     );
-  if (productData.length && !categoryItems.length) {
+  if (!isLoading && !categoryItems.length) {
     navigate("/404");
     return;
   }
