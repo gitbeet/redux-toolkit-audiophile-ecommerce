@@ -6,16 +6,15 @@ import {
   removeAll,
   removeAllLocalStorage,
 } from "../features/shoppingCart/shoppingCartSlice";
+import { toggleShowSuccessfulOrderWindow } from "../features/modals/modalsSlice";
 import "../css/SuccessfulOrder.css";
-import { usePopUp } from "../context/PopUpContext";
 
 export default function SuccessfulOrder() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { toggleSuccessfulOrderWindow } = usePopUp();
   function successfulOrderGoHome() {
-    toggleSuccessfulOrderWindow();
+    dispatch(toggleShowSuccessfulOrderWindow());
     navigate("/");
     if (user == null) {
       dispatch(removeAllLocalStorage());

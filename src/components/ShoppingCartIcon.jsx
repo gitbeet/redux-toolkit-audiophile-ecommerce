@@ -1,13 +1,14 @@
-import { usePopUp } from "../context/PopUpContext";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { toggleCheckoutWindow } from "../features/modals/modalsSlice";
 import "../css/ShoppingCartIcon.css";
 
 export default function ShoppingCartIcon() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const currentRoute = location.pathname;
   const { shoppingCart } = useSelector((state) => state.shoppingCart);
-  const { toggleCheckoutWindow, showSuccessfulOrderWindow } = usePopUp();
+  const { showSuccessfulOrderWindow } = useSelector((state) => state.modals);
   const numberOfProducts = Object.keys(shoppingCart).length;
   const disableIcon = currentRoute === "/checkout" || showSuccessfulOrderWindow;
   return (
@@ -16,7 +17,7 @@ export default function ShoppingCartIcon() {
         pointerEvents: disableIcon ? "none" : "auto",
       }}
       className="shopping-cart-icon"
-      onClick={toggleCheckoutWindow}
+      onClick={() => dispatch(toggleCheckoutWindow())}
     >
       <svg
         alt="shopping cart icon"

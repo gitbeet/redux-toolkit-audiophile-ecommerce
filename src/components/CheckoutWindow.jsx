@@ -1,8 +1,8 @@
 import { useState } from "react";
 import * as ReactDOM from "react-dom";
-import { usePopUp } from "../context/PopUpContext";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { setShowCheckoutWindow } from "../features/modals/modalsSlice";
 import {
   removeAll,
   removeAllLocalStorage,
@@ -21,7 +21,6 @@ export default function CheckoutWindow() {
   );
   const navigate = useNavigate();
   const { productData } = useSelector((state) => state.products);
-  const { hideCheckoutWindow } = usePopUp();
   const [error, setError] = useState();
   const [visible, setVisible] = useState(false);
   let totalPrice = shoppingCart.reduce(
@@ -45,7 +44,7 @@ export default function CheckoutWindow() {
       }, 3000);
       return;
     }
-    hideCheckoutWindow();
+    dispatch(setShowCheckoutWindow(false));
     navigate("/checkout");
   }
   const totalProductNumber = shoppingCart.reduce(
@@ -63,7 +62,7 @@ export default function CheckoutWindow() {
 
   return ReactDOM.createPortal(
     <>
-      <Backdrop clickFunction={hideCheckoutWindow} />
+      <Backdrop clickFunction={() => dispatch(setShowCheckoutWindow(false))} />
       <div className="checkout-window">
         <section>
           <h6 className="checkout-cart">cart ({totalProductNumber})</h6>
@@ -90,7 +89,10 @@ export default function CheckoutWindow() {
         >
           {error}
         </p>
-        <button onClick={checkout} className="btn-accent">
+        <button
+          onClick={checkout}
+          className="btn-accent"
+        >
           checkout
         </button>
       </div>

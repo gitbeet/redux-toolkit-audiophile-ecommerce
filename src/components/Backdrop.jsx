@@ -1,19 +1,15 @@
-import { usePopUp } from '../context/PopUpContext'
-import '../css/Backdrop.css'
+import "../css/Backdrop.css";
+// interface Props {
+//   clickFunction?: () => void;
+//   zIndexValue: number;
+// }
 
-
-export default function Backdrop({  
-                                    clickFunction,
-                                    zIndexValue= 19,
-                                   }) 
-{
-
-  const {showMobileMenu,showCheckoutWindow} = usePopUp()
-
+export default function Backdrop({ clickFunction, zIndexValue = 19 }) {
   return (
-    <div  onClick={clickFunction}  
-          style={{zIndex:zIndexValue}}
-          className='backdrop'>      
-    </div>
-  )
+    <div
+      onClick={clickFunction}
+      style={{ zIndex: zIndexValue }}
+      className="backdrop"
+    ></div>
+  );
 }

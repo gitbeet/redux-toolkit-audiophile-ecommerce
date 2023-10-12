@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import PopUpProvider from "./context/PopUpContext";
 import Home from "./components/Home";
 import PageNotFound from "./components/PageNotFound";
 import SharedLayout from "./components/SharedLayout";
@@ -29,44 +28,42 @@ function App() {
     console.log(products);
   }, [products]);
   return (
-    <PopUpProvider>
-      <Routes>
+    <Routes>
+      <Route
+        path="/"
+        element={<SharedLayout />}
+      >
         <Route
-          path="/"
-          element={<SharedLayout />}
-        >
-          <Route
-            index
-            element={<Home />}
-          />
-          <Route
-            path="/checkout"
-            element={<CheckoutForm />}
-          />
-          <Route
-            path="/register"
-            element={<Register />}
-          />
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          <Route
-            path="/:categoryName"
-            element={<CategoryPage />}
-          />
-          <Route
-            path="/:categoryName/:productId"
-            element={<ProductPage />}
-          />
-          <Route
-            path="/404"
-            element={<PageNotFound />}
-          />
-          {/* <Route path="/*" element={<PageNotFound />} /> */}
-        </Route>
-      </Routes>
-    </PopUpProvider>
+          index
+          element={<Home />}
+        />
+        <Route
+          path="/checkout"
+          element={<CheckoutForm />}
+        />
+        <Route
+          path="/register"
+          element={<Register />}
+        />
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+        <Route
+          path="/:categoryName"
+          element={<CategoryPage />}
+        />
+        <Route
+          path="/:categoryName/:productId"
+          element={<ProductPage />}
+        />
+        <Route
+          path="/404"
+          element={<PageNotFound />}
+        />
+        {/* <Route path="/*" element={<PageNotFound />} /> */}
+      </Route>
+    </Routes>
   );
 }
 

@@ -1,11 +1,14 @@
-import { usePopUp } from "../context/PopUpContext";
+import { useSelector } from "react-redux";
 import "../css/MobileMenuButton.css";
 
 export default function MobileMenuButton({ onClick }) {
-  const { showMobileMenu } = usePopUp();
+  const { showMobileMenu } = useSelector((state) => state.modals);
 
   return (
-    <div onClick={onClick} className="mobile-menu-button">
+    <div
+      onClick={onClick}
+      className="mobile-menu-button"
+    >
       <div
         className={
           showMobileMenu ? "mobile-menu-top-line-open" : "mobile-menu-top-line"

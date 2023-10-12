@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/ButtonArrow.css";
-import { usePopUp } from "../context/PopUpContext";
-
+import { useDispatch } from "react-redux";
+import { toggleMobileMenu } from "../features/modals/modalsSlice";
 export const iconArrowRight = (
   <svg
     width="8"
@@ -11,19 +11,18 @@ export const iconArrowRight = (
     <path
       d="M1.322 1l5 5-5 5"
       stroke="#D87D4A"
-      stroke-width="2"
+      strokeWidth="2"
       fill="none"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     />
   </svg>
 );
 
 export default function ButtonArrow({ text, mobileMenu }) {
-  const { toggleMobileMenu } = usePopUp();
-
+  const dispatch = useDispatch();
   return (
     <button
-      onClick={mobileMenu ? () => toggleMobileMenu() : () => {}}
+      onClick={mobileMenu ? () => dispatch(toggleMobileMenu()) : () => {}}
       className="button-arrow"
     >
       <p className="subtitle">{text}</p>

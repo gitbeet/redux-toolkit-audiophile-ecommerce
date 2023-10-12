@@ -13,6 +13,7 @@ export default function CheckoutProductWindow({ product, form = false }) {
   const dispatch = useDispatch();
   const { productData } = useSelector((state) => state.products);
 
+  if (!product) return <p>loading product</p>;
   const fullProductData = productData.find((prod) => {
     return prod.id.toString() === product.id;
   });

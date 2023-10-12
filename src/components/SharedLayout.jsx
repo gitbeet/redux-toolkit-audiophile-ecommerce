@@ -1,15 +1,17 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { usePopUp } from "../context/PopUpContext";
 import CheckoutWindow from "./CheckoutWindow";
 import CompanySummary from "./CompanySummary";
 import Footer from "./Footer";
 import MobileMenu from "./MobileMenu";
 import Nav from "./Nav";
 import SuccessfulOrderWindow from "./SuccessfulOrderWindow";
+import { useSelector } from "react-redux";
 
 export default function SharedLayout() {
-  const { showCheckoutWindow, showSuccessfulOrderWindow } = usePopUp();
+  const { showCheckoutWindow, showSuccessfulOrderWindow } = useSelector(
+    (state) => state.modals
+  );
   const location = useLocation();
 
   return (

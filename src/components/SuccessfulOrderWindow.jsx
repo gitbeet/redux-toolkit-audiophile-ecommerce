@@ -1,6 +1,5 @@
-import React from 'react'
-import Backdrop from './Backdrop'
-import SuccessfulOrder from './SuccessfulOrder'
+import Backdrop from "./Backdrop";
+import SuccessfulOrder from "./SuccessfulOrder";
 
 export default function SuccessfulOrderWindow() {
   return (
@@ -8,5 +7,5 @@ export default function SuccessfulOrderWindow() {
       <SuccessfulOrder />
       <Backdrop zIndexValue={20} />
     </div>
-  )
+  );
 }

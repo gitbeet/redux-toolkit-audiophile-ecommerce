@@ -5,13 +5,19 @@ import {
   checkoutFormSchemaCOD,
 } from "../Validations/checkoutFormValidation";
 import CheckoutFormSummary from "./CheckoutFormSummary";
-import { usePopUp } from "../context/PopUpContext";
 import { useNavigate } from "react-router-dom";
 import FormElement from "./FormElement";
 import FormRadioButtonElement from "./FormRadioButtonElement";
 import "../css/CheckoutForm.css";
-
+import { useDispatch } from "react-redux";
+import {
+  toggleCheckoutWindow,
+  toggleShowSuccessfulOrderWindow,
+} from "../features/modals/modalsSlice";
 export default function CheckoutForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       fullName: "",
@@ -27,7 +33,7 @@ export default function CheckoutForm() {
     },
     onSubmit: () => {
       if (!formik.isValid) return;
-      toggleSuccessfulOrderWindow();
+      dispatch(toggleShowSuccessfulOrderWindow());
     },
     validationSchema: () => {
       return formik.values.paymentMethod === "eMoney"
@@ -36,11 +42,8 @@ export default function CheckoutForm() {
     },
   });
 
-  const navigate = useNavigate();
-  const { toggleCheckoutWindow, toggleSuccessfulOrderWindow } = usePopUp();
-
   function goBackToCheckout() {
-    toggleCheckoutWindow();
+    dispatch(toggleCheckoutWindow());
     navigate(-1);
   }
   return (
