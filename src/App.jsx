@@ -11,7 +11,7 @@ import { useUserAuthStatus } from "./features/auth/useUserAuthStatus";
 import { useStoreShoppingCart } from "./features/shoppingCart/useStoreShoppingCart";
 import { useOnSnapshot } from "./features/shoppingCart/useOnSnapshot";
 import "./css/App.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { useEffect } from "react";
 import { getAllProducts } from "./features/products/productsSlice";
 
@@ -19,14 +19,12 @@ function App() {
   useStoreShoppingCart();
   useUserAuthStatus();
   useOnSnapshot();
-  const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
+  const dispatch = useAppDispatch();
+  const { products } = useAppSelector((state) => state.products);
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+  useEffect(() => {}, [products]);
   return (
     <Routes>
       <Route

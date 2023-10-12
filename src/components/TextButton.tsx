@@ -2,9 +2,9 @@ import "../css/TextButton.css";
 
 interface Props {
   clickFunction: () => void;
-  underline: boolean;
-  text: string;
-  disabled: boolean;
+  underline?: boolean;
+  text?: string;
+  disabled?: boolean;
 }
 
 export default function TextButton({
