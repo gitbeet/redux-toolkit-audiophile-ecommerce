@@ -10,21 +10,20 @@ import Login from "./components/Login";
 import { useUserAuthStatus } from "./features/auth/useUserAuthStatus";
 import { useStoreShoppingCart } from "./features/shoppingCart/useStoreShoppingCart";
 import { useOnSnapshot } from "./features/shoppingCart/useOnSnapshot";
-import "./css/App.css";
-import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
+import { useAppDispatch } from "./hooks/reduxHooks";
 import { useEffect } from "react";
 import { getAllProducts } from "./features/products/productsSlice";
+import "./css/App.css";
 
 function App() {
   useStoreShoppingCart();
   useUserAuthStatus();
   useOnSnapshot();
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector((state) => state.products);
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-  useEffect(() => {}, [products]);
+
   return (
     <Routes>
       <Route
@@ -59,7 +58,6 @@ function App() {
           path="/404"
           element={<PageNotFound />}
         />
-        {/* <Route path="/*" element={<PageNotFound />} /> */}
       </Route>
     </Routes>
   );
