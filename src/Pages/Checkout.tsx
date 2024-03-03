@@ -46,7 +46,10 @@ export default function Checkout() {
     navigate(-1);
   }
   return (
-    <div className="checkout-form">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="checkout-form"
+    >
       <div className="checkout-wrapper">
         <p
           onClick={goBackToCheckout}
@@ -181,15 +184,14 @@ export default function Checkout() {
             <h6 className="checkout-form-text-summary">summary</h6>
             <CheckoutFormSummary />
             <button
-              onClick={() => formik.handleSubmit}
               className="btn-accent"
-              type="button"
+              type="submit"
             >
               continue & pay
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
