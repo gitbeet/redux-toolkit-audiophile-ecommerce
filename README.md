@@ -38,6 +38,7 @@ The project is completed. It has all the functionality as described in the [chal
 ## Technologies used
 
 - React using Create React App - javascript framework / library
+- Typescript - for type safety
 - Redux Toolkit - state manager
 - Firebase - for storing user and products data
 - Formik - for handling forms
