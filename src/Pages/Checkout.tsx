@@ -3,17 +3,17 @@ import {
   checkoutFormSchemaEMoney,
   checkoutFormSchemaCOD,
 } from "../Validations/checkoutFormValidation";
-import CheckoutFormSummary from "./CheckoutFormSummary";
+import CheckoutFormSummary from "../components/CheckoutFormSummary";
 import { useNavigate } from "react-router-dom";
-import FormElement from "./FormElement";
-import FormRadioButtonElement from "./FormRadioButtonElement";
+import FormElement from "../components/FormElement";
+import FormRadioButtonElement from "../components/FormRadioButtonElement";
 import "../css/CheckoutForm.css";
 import { useAppDispatch } from "../hooks/reduxHooks";
 import {
   toggleCheckoutWindow,
   toggleShowSuccessfulOrderWindow,
 } from "../features/modals/modalsSlice";
-export default function CheckoutForm() {
+export default function Checkout() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

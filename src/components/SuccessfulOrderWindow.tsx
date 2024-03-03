@@ -1,5 +1,5 @@
 import Backdrop from "./Backdrop";
-import SuccessfulOrder from "./SuccessfulOrder";
+import SuccessfulOrder from "../Pages/SuccessfulOrder";
 
 export default function SuccessfulOrderWindow() {
   return (

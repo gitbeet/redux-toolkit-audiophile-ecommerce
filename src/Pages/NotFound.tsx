@@ -2,7 +2,7 @@ import "../css/PageNotFound.css";
 
 import { Link } from "react-router-dom";
 
-export default function PageNotFound() {
+export default function NotFound() {
   return (
     <div className="container text-center not-found">
       <h1>Sorry :(</h1>

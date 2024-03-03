@@ -1,8 +1,8 @@
-import CategoryList from "./CategoryList";
-import HomeHeader from "./HomeHeader";
-import ProductAdZX7 from "./ProductAdZX7";
-import ProductAdZX9 from "./ProductAdZX9";
-import ProductAdYX1 from "./ProductAdYX1";
+import CategoryList from "../components/CategoryList";
+import HomeHeader from "../components/HomeHeader";
+import ProductAdZX7 from "../components/ProductAdZX7";
+import ProductAdZX9 from "../components/ProductAdZX9";
+import ProductAdYX1 from "../components/ProductAdYX1";
 import "../css/Home.css";
 
 export default function Home() {

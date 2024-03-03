@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import PageNotFound from "./components/PageNotFound";
-import SharedLayout from "./components/SharedLayout";
-import CategoryPage from "./components/CategoryPage";
-import ProductPage from "./components/ProductPage";
-import CheckoutForm from "./components/CheckoutForm";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Home from "./Pages/Home";
+import PageNotFound from "./Pages/NotFound";
+import SharedLayout from "./Layouts/MainLayout";
+import Category from "./Pages/Category";
+import Product from "./Pages/Product";
+import Checkout from "./Pages/Checkout";
+import Register from "./Pages/Register";
+import Login from "./Pages/Login";
 import { useUserAuthStatus } from "./features/auth/useUserAuthStatus";
 import { useStoreShoppingCart } from "./features/shoppingCart/useStoreShoppingCart";
 import { useOnSnapshot } from "./features/shoppingCart/useOnSnapshot";
@@ -36,7 +36,7 @@ function App() {
         />
         <Route
           path="/checkout"
-          element={<CheckoutForm />}
+          element={<Checkout />}
         />
         <Route
           path="/register"
@@ -48,11 +48,11 @@ function App() {
         />
         <Route
           path="/:categoryName"
-          element={<CategoryPage />}
+          element={<Category />}
         />
         <Route
           path="/:categoryName/:productId"
-          element={<ProductPage />}
+          element={<Product />}
         />
         <Route
           path="/404"

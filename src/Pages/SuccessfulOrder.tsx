@@ -1,5 +1,5 @@
 import icon from "../assets/checkout/icon-order-confirmation.svg";
-import SuccessfulOrderProductWindow from "./SuccessfulOrderProductWindow";
+import SuccessfulOrderProductWindow from "../components/SuccessfulOrderProductWindow";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import {

@@ -1,4 +1,4 @@
-import FormElement from "./FormElement";
+import FormElement from "../components/FormElement";
 import "../css/Register.css";
 import { useFormik } from "formik";
 import { loginFormValidation } from "../Validations/loginFormValidation";

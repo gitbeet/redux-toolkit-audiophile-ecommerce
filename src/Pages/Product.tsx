@@ -2,17 +2,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/reduxHooks";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { MoonLoader } from "react-spinners";
-import PageNotFound from "./PageNotFound";
-import InTheBoxList from "./InTheBoxList";
-import ProductImageGallery from "./ProductImageGallery";
-import ReccomendedList from "./ReccomendedList";
-import CategoryList from "./CategoryList";
-import AddToCart from "./AddToCart";
-import TextButton from "./TextButton";
+import PageNotFound from "./NotFound";
+import InTheBoxList from "../components/InTheBoxList";
+import ProductImageGallery from "../components/ProductImageGallery";
+import ReccomendedList from "../components/ReccomendedList";
+import CategoryList from "../components/CategoryList";
+import AddToCart from "../components/AddToCart";
+import TextButton from "../components/TextButton";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import "../css/ProductPage.css";
 
-export default function ProductPage() {
+export default function Product() {
   const navigate = useNavigate();
 
   const { productId } = useParams();

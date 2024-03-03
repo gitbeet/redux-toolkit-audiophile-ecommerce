@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
-import ProductCard from "./ProductCard";
-import CategoryList from "./CategoryList";
+import ProductCard from "../components/ProductCard";
+import CategoryList from "../components/CategoryList";
 import { useAppSelector } from "../hooks/reduxHooks";
 import { MoonLoader } from "react-spinners";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 import "../css/CategoryPage.css";
 
-export default function CategoryPage() {
+export default function Category() {
   const navigate = useNavigate();
   const { categoryName } = useParams();
   const { productData, isLoading } = useAppSelector((state) => state.products);
